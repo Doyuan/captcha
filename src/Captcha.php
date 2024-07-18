@@ -151,7 +151,7 @@ class Captcha
             $key = mb_strtolower($bag, 'UTF-8');
         }
 
-        $config = config('plugin.dong.captcha.app.captcha');
+        $config = config('plugin.dongo.captcha.app.captcha');
         $hash = password_hash($key, PASSWORD_BCRYPT, ['cost' => 10]);
         Redis::multi();
         Redis::hMSet($config['prefix'] . $hash, ['key' => $hash]);
