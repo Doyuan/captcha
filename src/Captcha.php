@@ -99,7 +99,7 @@ class Captcha
         }
 
         // 绘制验证码
-        $text = $config['useZh'] ? preg_split('/(?<!^)(?!$)/u', $generator['value']) : preg_split($generator['value']);
+        $text = $config['useZh'] ? preg_split('/(?<!^)(?!$)/u', $generator['value']) : str($generator['value']);
 
         foreach ($text as $index => $char) {
             $x = $config['fontSize'] * ($index + 1) * mt_rand((int)1.2, (int)1.6) * ($config['math'] ? 1 : 1.5);
