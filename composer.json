@@ -1,0 +1,14 @@
+{
+  "name": "dongo/captcha",
+  "type": "library",
+  "license": "MIT",
+  "description": "仿tinywan大佬尝试一下webman的基础插件的过程",
+  "require": {
+
+  },
+  "autoload": {
+    "psr-4": {
+      "Dongo\\Captcha\\": "src"
+    }
+  }
+}
