@@ -18,7 +18,7 @@ class Captcha
      */
     public static function check(string $code, string $key)
     {
-        $config = config('plugin.tinywan.captcha.app.captcha');
+        $config = config('plugin.dongo.captcha.app.captcha');
         $cacheKey = $config['prefix'] . $key;
         if (!Redis::exists($cacheKey)) {
             return false;
@@ -130,7 +130,7 @@ class Captcha
     {
         $bag = '';
         if ($config['math']) {
-            $config['useZH'] = false;
+            $config['useZh'] = false;
             $config['length'] = 5;
             $x = random_int(10, 30);
             $y = random_int(1, 9);
@@ -138,20 +138,20 @@ class Captcha
             $key = $x + $y;
             $key .= '';
         } else {
-            if ($config['useZH']) {
+            if ($config['useZh']) {
                 $characters = preg_split('/(?<!^)(?!$)/u', $config['zhSet']);
             } else {
-                $characters = preg_split($config['codeSet']);
+                $characters = str_split($config['codeSet']);
             }
 
-            for ($i = 0; $i < $config['length']; $i) {
+            for ($i = 0; $i < $config['length']; $i++) {
                 $bag .= $characters[rand(0, count($characters) - 1)];
             }
 
             $key = mb_strtolower($bag, 'UTF-8');
         }
 
-        $config = config('plugin.tinywan.captcha.app.captcha');
+        $config = config('plugin.dong.captcha.app.captcha');
         $hash = password_hash($key, PASSWORD_BCRYPT, ['cost' => 10]);
         Redis::multi();
         Redis::hMSet($config['prefix'] . $hash, ['key' => $hash]);
